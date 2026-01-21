@@ -1,14 +1,20 @@
-sudo apt-get install gnupg curl
+# إنشاء مجلد مؤقت للملفات
+mkdir ~/mongo-install && cd ~/mongo-install
 
-curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
-   sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg \
-   --dearmor --yes
+# تحميل الحزم الأساسية (نسخة 8.0 المخصصة لـ Ubuntu 24.04 Noble)
+wget https://repo.mongodb.org/apt/ubuntu/dists/noble/mongodb-org/8.0/multiverse/binary-amd64/mongodb-org-server_8.0.0_amd64.deb
+wget https://repo.mongodb.org/apt/ubuntu/dists/noble/mongodb-org/8.0/multiverse/binary-amd64/mongodb-org-database-tools-extra_8.0.0_amd64.deb
+wget https://repo.mongodb.org/apt/ubuntu/dists/noble/mongodb-org/8.0/multiverse/binary-amd64/mongodb-org-mongos_8.0.0_amd64.deb
+wget https://repo.mongodb.org/apt/ubuntu/dists/noble/mongodb-org/8.0/multiverse/binary-amd64/mongodb-database-tools_100.10.0_amd64.deb
 
-echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+sudo dpkg -i *.deb
 
-sudo apt-get update
-sudo apt-get install -y mongodb-org
+wget https://downloads.mongodb.com/compass/mongodb-mongosh_2.3.1_amd64.deb
+sudo dpkg -i mongodb-mongosh_2.3.1_amd64.deb
 
+sudo systemctl daemon-reload
+sudo systemctl start mongod
+sudo systemctl enable mongod
 
 
 
