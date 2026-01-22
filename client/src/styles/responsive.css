@@ -1,0 +1,910 @@
+/* ============================================
+   ملف التجاوب - مكتبة كلية الهندسة
+   جامعة البحر الأحمر
+   ============================================ */
+
+/* --------------------------------------------
+   نقاط التوقف (Breakpoints)
+   -------------------------------------------- */
+/* 
+  xs: < 576px      (هواتف - عمودي)
+  sm: ≥ 576px      (هواتف - أفقي)
+  md: ≥ 768px      (أجهزة لوحية)
+  lg: ≥ 992px      (لاب توبات صغيرة)
+  xl: ≥ 1200px     (لاب توبات كبيرة وشاشات)
+  xxl: ≥ 1400px    (شاشات كبيرة جداً)
+*/
+
+/* --------------------------------------------
+   أدوات الاستعلام الإعلامي
+   -------------------------------------------- */
+@media (max-width: 575.98px) {
+  /* هواتف - عمودي */
+  :root {
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --font-size-lg: 1rem;
+    --font-size-xl: 1.125rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* هواتف - أفقي */
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* أجهزة لوحية */
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* لاب توبات صغيرة */
+}
+
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  /* لاب توبات كبيرة وشاشات */
+}
+
+@media (min-width: 1400px) {
+  /* شاشات كبيرة جداً */
+}
+
+/* --------------------------------------------
+   التجاوب العام
+   -------------------------------------------- */
+
+/* الحاوية */
+.container {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+}
+
+/* الشبكة */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 767.98px) {
+  .grid-responsive {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* التخطيط المرن */
+.flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 767.98px) {
+  .flex-responsive {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* --------------------------------------------
+   شريط التنقل
+   -------------------------------------------- */
+.navbar {
+  height: var(--header-height);
+  padding: 0 var(--spacing-lg);
+}
+
+@media (max-width: 767.98px) {
+  .navbar {
+    padding: 0 var(--spacing-md);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-md);
+  }
+  
+  .navbar-menu.active {
+    display: block;
+  }
+  
+  .navbar-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: none;
+  }
+}
+
+/* --------------------------------------------
+   الشريط الجانبي
+   -------------------------------------------- */
+@media (max-width: 991.98px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    z-index: 1050;
+    transition: right var(--transition-normal) ease;
+  }
+  
+  .sidebar.active {
+    right: 0;
+  }
+  
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+  }
+  
+  .sidebar-overlay.active {
+    display: block;
+  }
+  
+  .sidebar-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .sidebar-toggle {
+    display: none;
+  }
+  
+  .main-content {
+    margin-right: var(--sidebar-width);
+  }
+}
+
+/* --------------------------------------------
+   بطاقات المواد
+   -------------------------------------------- */
+.course-card {
+  min-height: 200px;
+}
+
+@media (max-width: 767.98px) {
+  .course-card {
+    min-height: 180px;
+    padding: var(--spacing-md);
+  }
+  
+  .course-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .course-card-footer {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .course-card {
+    min-height: 160px;
+  }
+}
+
+/* --------------------------------------------
+   بطاقات الملفات
+   -------------------------------------------- */
+.file-card {
+  min-height: 80px;
+}
+
+@media (max-width: 767.98px) {
+  .file-card {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .file-card-content {
+    width: 100%;
+  }
+  
+  .file-card-meta {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+}
+
+/* --------------------------------------------
+   رسائل المنتدى
+   -------------------------------------------- */
+.forum-message {
+  min-height: 150px;
+}
+
+@media (max-width: 767.98px) {
+  .forum-message {
+    padding: var(--spacing-md);
+  }
+  
+  .forum-message-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .forum-message-footer {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: stretch;
+  }
+}
+
+/* --------------------------------------------
+   لوحات التحكم
+   -------------------------------------------- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 767.98px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .dashboard-card {
+    padding: var(--spacing-md);
+  }
+  
+  .dashboard-card-value {
+    font-size: var(--font-size-xxl);
+  }
+}
+
+/* --------------------------------------------
+   النماذج
+   -------------------------------------------- */
+.form-container {
+  max-width: 500px;
+  padding: var(--spacing-xl);
+}
+
+@media (max-width: 767.98px) {
+  .form-container {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .form-container {
+    padding: var(--spacing-md);
+    margin: var(--spacing-sm);
+    box-shadow: none;
+    border-radius: 0;
+  }
+  
+  .input-group-horizontal {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+  
+  .input-group-horizontal .label {
+    min-width: auto;
+  }
+}
+
+/* --------------------------------------------
+   الجداول
+   -------------------------------------------- */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767.98px) {
+  table {
+    font-size: var(--font-size-sm);
+  }
+  
+  th, td {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* --------------------------------------------
+   الرسوم البيانية
+   -------------------------------------------- */
+.chart-container {
+  min-height: 300px;
+}
+
+@media (max-width: 767.98px) {
+  .chart-container {
+    min-height: 250px;
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .chart-container {
+    min-height: 200px;
+  }
+}
+
+/* --------------------------------------------
+   الأزرار
+   -------------------------------------------- */
+.btn-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767.98px) {
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  .btn-group .btn {
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------
+   شريط البحث
+   -------------------------------------------- */
+.search-bar {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .search-bar {
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 992px) {
+  .search-bar {
+    max-width: 500px;
+  }
+}
+
+/* --------------------------------------------
+   العناوين
+   -------------------------------------------- */
+h1 {
+  font-size: var(--font-size-xxxl);
+}
+
+h2 {
+  font-size: var(--font-size-xxl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+@media (max-width: 767.98px) {
+  h1 {
+    font-size: var(--font-size-xxl);
+  }
+  
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 575.98px) {
+  h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  h3 {
+    font-size: var(--font-size-md);
+  }
+}
+
+/* --------------------------------------------
+   النصوص الطويلة
+   -------------------------------------------- */
+.text-responsive {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  line-height: clamp(1.5, 2vw, 1.8);
+}
+
+/* --------------------------------------------
+   الصور
+   -------------------------------------------- */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* نسب الصور */
+.aspect-ratio-16-9 {
+  aspect-ratio: 16/9;
+}
+
+.aspect-ratio-4-3 {
+  aspect-ratio: 4/3;
+}
+
+.aspect-ratio-1-1 {
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 767.98px) {
+  .aspect-ratio-16-9,
+  .aspect-ratio-4-3 {
+    aspect-ratio: 3/2;
+  }
+}
+
+/* --------------------------------------------
+   إخفاء العناصر حسب الشاشة
+   -------------------------------------------- */
+.hidden-xs {
+  display: none !important;
+}
+
+@media (min-width: 576px) {
+  .hidden-xs {
+    display: block !important;
+  }
+  
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hidden-sm {
+    display: block !important;
+  }
+  
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .hidden-md {
+    display: block !important;
+  }
+  
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hidden-lg {
+    display: block !important;
+  }
+  
+  .hidden-xl {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hidden-xl {
+    display: block !important;
+  }
+}
+
+/* إظهار العناصر حسب الشاشة */
+.visible-xs {
+  display: block !important;
+}
+
+@media (min-width: 576px) {
+  .visible-xs {
+    display: none !important;
+  }
+  
+  .visible-sm {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-sm {
+    display: none !important;
+  }
+  
+  .visible-md {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .visible-md {
+    display: none !important;
+  }
+  
+  .visible-lg {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .visible-lg {
+    display: none !important;
+  }
+  
+  .visible-xl {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .visible-xl {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------
+   توجيه العناصر
+   -------------------------------------------- */
+.flex-direction-xs-column {
+  flex-direction: column;
+}
+
+@media (min-width: 576px) {
+  .flex-direction-sm-row {
+    flex-direction: row !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .flex-direction-md-row {
+    flex-direction: row !important;
+  }
+}
+
+/* --------------------------------------------
+   محاذاة العناصر
+   -------------------------------------------- */
+.align-xs-start {
+  align-items: flex-start;
+}
+
+.align-xs-center {
+  align-items: center;
+}
+
+.align-xs-end {
+  align-items: flex-end;
+}
+
+@media (min-width: 576px) {
+  .align-sm-start {
+    align-items: flex-start !important;
+  }
+  
+  .align-sm-center {
+    align-items: center !important;
+  }
+  
+  .align-sm-end {
+    align-items: flex-end !important;
+  }
+}
+
+/* --------------------------------------------
+   توزيع العناصر
+   -------------------------------------------- */
+.justify-xs-start {
+  justify-content: flex-start;
+}
+
+.justify-xs-center {
+  justify-content: center;
+}
+
+.justify-xs-end {
+  justify-content: flex-end;
+}
+
+.justify-xs-between {
+  justify-content: space-between;
+}
+
+@media (min-width: 576px) {
+  .justify-sm-start {
+    justify-content: flex-start !important;
+  }
+  
+  .justify-sm-center {
+    justify-content: center !important;
+  }
+  
+  .justify-sm-end {
+    justify-content: flex-end !important;
+  }
+  
+  .justify-sm-between {
+    justify-content: space-between !important;
+  }
+}
+
+/* --------------------------------------------
+   المسافات حسب الشاشة
+   -------------------------------------------- */
+.mt-xs-0 { margin-top: 0 !important; }
+.mt-xs-1 { margin-top: var(--spacing-xs) !important; }
+.mt-xs-2 { margin-top: var(--spacing-sm) !important; }
+.mt-xs-3 { margin-top: var(--spacing-md) !important; }
+
+.mb-xs-0 { margin-bottom: 0 !important; }
+.mb-xs-1 { margin-bottom: var(--spacing-xs) !important; }
+.mb-xs-2 { margin-bottom: var(--spacing-sm) !important; }
+.mb-xs-3 { margin-bottom: var(--spacing-md) !important; }
+
+@media (min-width: 576px) {
+  .mt-sm-0 { margin-top: 0 !important; }
+  .mt-sm-1 { margin-top: var(--spacing-xs) !important; }
+  .mt-sm-2 { margin-top: var(--spacing-sm) !important; }
+  .mt-sm-3 { margin-top: var(--spacing-md) !important; }
+  
+  .mb-sm-0 { margin-bottom: 0 !important; }
+  .mb-sm-1 { margin-bottom: var(--spacing-xs) !important; }
+  .mb-sm-2 { margin-bottom: var(--spacing-sm) !important; }
+  .mb-sm-3 { margin-bottom: var(--spacing-md) !important; }
+}
+
+@media (min-width: 768px) {
+  .mt-md-0 { margin-top: 0 !important; }
+  .mt-md-1 { margin-top: var(--spacing-xs) !important; }
+  .mt-md-2 { margin-top: var(--spacing-sm) !important; }
+  .mt-md-3 { margin-top: var(--spacing-md) !important; }
+  
+  .mb-md-0 { margin-bottom: 0 !important; }
+  .mb-md-1 { margin-bottom: var(--spacing-xs) !important; }
+  .mb-md-2 { margin-bottom: var(--spacing-sm) !important; }
+  .mb-md-3 { margin-bottom: var(--spacing-md) !important; }
+}
+
+/* --------------------------------------------
+   الخطوط حسب الشاشة
+   -------------------------------------------- */
+.text-xs-center { text-align: center !important; }
+.text-xs-right { text-align: right !important; }
+.text-xs-left { text-align: left !important; }
+
+@media (min-width: 576px) {
+  .text-sm-center { text-align: center !important; }
+  .text-sm-right { text-align: right !important; }
+  .text-sm-left { text-align: left !important; }
+}
+
+@media (min-width: 768px) {
+  .text-md-center { text-align: center !important; }
+  .text-md-right { text-align: right !important; }
+  .text-md-left { text-align: left !important; }
+}
+
+@media (min-width: 992px) {
+  .text-lg-center { text-align: center !important; }
+  .text-lg-right { text-align: right !important; }
+  .text-lg-left { text-align: left !important; }
+}
+
+/* --------------------------------------------
+   اتجاه النص حسب الشاشة
+   -------------------------------------------- */
+.text-direction-xs-rtl {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.text-direction-xs-ltr {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+@media (min-width: 576px) {
+  .text-direction-sm-rtl {
+    direction: rtl !important;
+    text-align: right !important;
+  }
+  
+  .text-direction-sm-ltr {
+    direction: ltr !important;
+    text-align: left !important;
+  }
+}
+
+/* --------------------------------------------
+   الوضع الأفقي للهواتف
+   -------------------------------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .navbar {
+    height: 48px;
+  }
+  
+  .sidebar {
+    width: 240px;
+  }
+  
+  .course-card,
+  .file-card,
+  .forum-message {
+    min-height: auto;
+  }
+  
+  .dashboard-card {
+    padding: var(--spacing-md);
+  }
+}
+
+/* --------------------------------------------
+   الشاشات عالية الدقة
+   -------------------------------------------- */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo-image,
+  .forum-message-avatar,
+  .dashboard-card-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* --------------------------------------------
+   الدعم للميزات الحديثة
+   -------------------------------------------- */
+@supports (display: grid) {
+  .grid-fallback {
+    display: none;
+  }
+}
+
+@supports not (display: grid) {
+  .grid-fallback {
+    display: block;
+  }
+  
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .grid > * {
+    flex: 1 0 250px;
+    margin: var(--spacing-sm);
+  }
+}
+
+/* --------------------------------------------
+   الطباعة
+   -------------------------------------------- */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000;
+    background: #fff;
+  }
+  
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  table, figure {
+    page-break-inside: avoid;
+  }
+}
+
+/* --------------------------------------------
+   التمرير السلس على الهواتف
+   -------------------------------------------- */
+@media (max-width: 767.98px) {
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* إصلاح ارتفاع الشاشة على iOS */
+  .full-height-ios {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+}
+
+/* --------------------------------------------
+   دعم متصفحات ويب كيت القديمة
+   -------------------------------------------- */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px; /* منع التكبير التلقائي على iOS */
+  }
+}
+
+/* --------------------------------------------
+   أنماط محددة للمتصفحات
+   -------------------------------------------- */
+
+/* فايرفوكس */
+@-moz-document url-prefix() {
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+/* سفاري */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select {
+    -webkit-appearance: none;
+  }
+  
+  input[type="number"] {
+    -webkit-appearance: textfield;
+  }
+}
