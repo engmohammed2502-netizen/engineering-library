@@ -1,4 +1,27 @@
 
+# أولاً: أوقف MongoDB إذا كان يعمل
+sudo systemctl stop mongod 2>/dev/null || true
+sudo pkill -f mongod 2>/dev/null || true
+
+# ثانياً: إنشاء مجلد للبيانات
+sudo mkdir -p /data/db
+sudo chmod 777 /data/db
+
+# أو استخدم مسار في home
+mkdir -p ~/mongodb-data
+sudo chmod 777 ~/mongodb-data
+
+# ثالثاً: تشغيل mongod
+sudo mongod --dbpath /data/db --fork --logpath /var/log/mongodb.log --bind_ip 0.0.0.0
+
+# أو بدون sudo
+mongod --dbpath ~/mongodb-data --fork --logpath ~/mongodb.log --bind_ip 0.0.0.0
+
+
+
+
+
+
 
 # تشغيل الخدمة
 sudo systemctl start mongod
